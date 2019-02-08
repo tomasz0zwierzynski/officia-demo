@@ -1,0 +1,37 @@
+{
+    "name": "Available",
+    "fields": [
+        {
+            "fieldName": "begin",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "end",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "tutor",
+            "otherEntityName": "tutor",
+            "otherEntityField": "fullname"
+        }
+    ],
+    "changelogDate": "20190208105521",
+    "entityTableName": "available",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "skipClient": true
+}

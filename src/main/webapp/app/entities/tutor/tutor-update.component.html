@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-tutor-heading" jhiTranslate="iterateApp.tutor.home.createOrEditLabel">Create or edit a Tutor</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!tutor.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="tutor.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="iterateApp.tutor.fullname" for="field_fullname">Fullname</label>
+                    <input type="text" class="form-control" name="fullname" id="field_fullname"
+                        [(ngModel)]="tutor.fullname" required/>
+                    <div [hidden]="!(editForm.controls.fullname?.dirty && editForm.controls.fullname?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fullname?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="iterateApp.tutor.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="tutor.user" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === tutor.user?.id ? tutor.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="iterateApp.tutor.subject" for="field_subject">Subject</label>
+                    <select class="form-control" id="field_subject" multiple name="subject" [(ngModel)]="tutor.subjects">
+                        <option [ngValue]="getSelected(tutor.subjects, subjectOption)" *ngFor="let subjectOption of subjects; trackBy: trackSubjectById">{{subjectOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

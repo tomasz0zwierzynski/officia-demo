@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Tutor.
+    -->
+    <changeSet id="20190208105519-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="tutor"
+                                 constraintName="fk_tutor_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="tutor_id"
+                                 baseTableName="tutor_subject"
+                                 constraintName="fk_tutor_subject_tutor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tutor"/>
+        <addForeignKeyConstraint baseColumnNames="subject_id"
+                                 baseTableName="tutor_subject"
+                                 constraintName="fk_tutor_subject_subject_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="subject"/>
+        
+    </changeSet>
+</databaseChangeLog>

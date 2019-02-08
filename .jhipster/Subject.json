@@ -1,0 +1,32 @@
+{
+    "name": "Subject",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": 3
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "tutor",
+            "otherEntityName": "tutor",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "subject"
+        }
+    ],
+    "changelogDate": "20190208105520",
+    "entityTableName": "subject",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

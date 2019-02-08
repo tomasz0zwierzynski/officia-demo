@@ -1,0 +1,64 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="iterateApp.tutor.home.title">Tutors</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tutor" [routerLink]="['/tutor/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="iterateApp.tutor.home.createLabel">
+            Create new Tutor
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="tutors">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="iterateApp.tutor.fullname">Fullname</span></th>
+            <th><span jhiTranslate="iterateApp.tutor.user">User</span></th>
+            <th><span jhiTranslate="iterateApp.tutor.subject">Subject</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let tutor of tutors ;trackBy: trackId">
+                <td><a [routerLink]="['/tutor', tutor.id, 'view' ]">{{tutor.id}}</a></td>
+                <td>{{tutor.fullname}}</td>
+                <td>
+                    {{tutor.user?.login}}
+                </td>
+                <td>
+                    <span *ngFor="let subject of tutor.subjects; let last = last">
+                            <a class="form-control-static" [routerLink]="['../subject', subject?.id, 'view' ]">{{subject.name}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/tutor', tutor.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/tutor', tutor.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'tutor', { outlets: { popup: tutor.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

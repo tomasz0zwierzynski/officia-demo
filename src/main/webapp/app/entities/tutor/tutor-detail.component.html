@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="tutor">
+            <h2><span jhiTranslate="iterateApp.tutor.detail.title">Tutor</span> {{tutor.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="iterateApp.tutor.fullname">Fullname</span></dt>
+                <dd>
+                    <span>{{tutor.fullname}}</span>
+                </dd>
+                <dt><span jhiTranslate="iterateApp.tutor.user">User</span></dt>
+                <dd>
+                    {{tutor.user?.login}}
+                </dd>
+                <dt><span jhiTranslate="iterateApp.tutor.subject">Subject</span></dt>
+                <dd>
+                    <span *ngFor="let subject of tutor.subjects; let last = last">
+                        <a [routerLink]="['/subject', subject?.id, 'view' ]">{{subject.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/tutor', tutor.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

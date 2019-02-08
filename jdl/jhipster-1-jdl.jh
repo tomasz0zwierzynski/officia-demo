@@ -1,0 +1,39 @@
+entity Appointment {
+	place String required
+    date LocalDate required
+    duration Integer required
+}
+
+entity Student {
+	fullname String required
+}
+
+entity Tutor {
+	fullname String required
+}
+
+entity Subject {
+	name String required minlength(3)    
+}
+
+entity Available {
+	begin LocalDate required
+    end LocalDate required
+}
+
+relationship ManyToOne {
+	Tutor{user(login)} to User
+    Available{tutor(fullname)} to Tutor
+    Student{user(login)} to User
+	Appointment{tutor(fullname)} to Tutor
+    Appointment{student(fullname)} to Student
+    Appointment{subject(name)} to Subject
+}
+
+relationship ManyToMany {
+	Tutor{subject(name)} to Subject{tutor(fullname)}
+}
+
+skipClient Appointment, Available
+
+service * with serviceClass
