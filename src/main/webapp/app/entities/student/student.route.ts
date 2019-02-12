@@ -33,7 +33,7 @@ export const studentRoute: Routes = [
         path: '',
         component: StudentComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_TUTOR'],
             pageTitle: 'iterateApp.student.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const studentRoute: Routes = [
             student: StudentResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_TUTOR'],
             pageTitle: 'iterateApp.student.home.title'
         },
         canActivate: [UserRouteAccessService]
