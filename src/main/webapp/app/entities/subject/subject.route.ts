@@ -33,7 +33,7 @@ export const subjectRoute: Routes = [
         path: '',
         component: SubjectComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_STUDENT', 'ROLE_TUTOR'],
             pageTitle: 'iterateApp.subject.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const subjectRoute: Routes = [
             subject: SubjectResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_STUDENT', 'ROLE_TUTOR'],
             pageTitle: 'iterateApp.subject.home.title'
         },
         canActivate: [UserRouteAccessService]

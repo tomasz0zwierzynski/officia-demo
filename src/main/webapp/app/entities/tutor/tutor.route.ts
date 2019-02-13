@@ -33,7 +33,7 @@ export const tutorRoute: Routes = [
         path: '',
         component: TutorComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_STUDENT'],
             pageTitle: 'iterateApp.tutor.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const tutorRoute: Routes = [
             tutor: TutorResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER', 'ROLE_STUDENT'],
             pageTitle: 'iterateApp.tutor.home.title'
         },
         canActivate: [UserRouteAccessService]

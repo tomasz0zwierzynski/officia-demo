@@ -27,19 +27,19 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_TUTOR'">
                         <a class="dropdown-item" routerLink="student" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.student">Student</span>
                         </a>
                     </li>
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_STUDENT'">
                         <a class="dropdown-item" routerLink="tutor" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.tutor">Tutor</span>
                         </a>
                     </li>
-                    <li>
+                    <li *jhiHasAnyAuthority="['ROLE_TUTOR','ROLE_STUDENT']">
                         <a class="dropdown-item" routerLink="subject" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.subject">Subject</span>
