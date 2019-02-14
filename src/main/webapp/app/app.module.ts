@@ -18,6 +18,8 @@ import { IterateHomeModule } from './home/home.module';
 import { IterateAccountModule } from './account/account.module';
 import { IterateEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
+import { IterateAppSchedulerModule } from './scheduler/scheduler.module';
+import { IterateAppAvailableModule } from './available/available.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
@@ -36,6 +38,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         IterateCoreModule,
         IterateHomeModule,
         IterateAccountModule,
+        IterateAppSchedulerModule,
+        IterateAppAvailableModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         IterateEntityModule,
         IterateAppRoutingModule
