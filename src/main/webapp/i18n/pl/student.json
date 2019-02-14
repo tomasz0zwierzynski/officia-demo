@@ -1,0 +1,22 @@
+{
+    "iterateApp": {
+        "student": {
+            "home": {
+                "title": "Uczniowie",
+                "createLabel": "Utwórz nowego ucznia",
+                "createOrEditLabel": "Utwórz lub edytuj ucznia"
+            },
+            "created": "Uczeń utworzony z identyfikatorem {{ param }}",
+            "updated": "Uczeń  z identyfikatorem{{ param }} zaktualizowany",
+            "deleted": "Uczeń z identyfikatorem {{ param }} usunięty",
+            "delete": {
+                "question": "Czy na pewno usunąć ucznia o identyfikatorze {{ id }}?"
+            },
+            "detail": {
+                "title": "Uczeń"
+            },
+            "fullname": "Imię i nazwisko",
+            "user": "User"
+        }
+    }
+}

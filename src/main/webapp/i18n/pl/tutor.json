@@ -1,0 +1,23 @@
+{
+    "iterateApp": {
+        "tutor": {
+            "home": {
+                "title": "Korepetytorzy",
+                "createLabel": "Utwórz nowego korepetytora",
+                "createOrEditLabel": "Utwórz lub edytuj korepetytora"
+            },
+            "created": "Korepetytor utworzony z identyfikatorem {{ param }}",
+            "updated": "Korepetytor  z identyfikatorem{{ param }} zaktualizowany",
+            "deleted": "Korepetytor z identyfikatorem {{ param }} usunięty",
+            "delete": {
+                "question": "Czy na pewno usunąć ucznia o identyfikatorze {{ id }}?"
+            },
+            "detail": {
+                "title": "Korepetytor"
+            },
+            "fullname": "Imię i nazwisko",
+            "user": "User",
+            "subject": "Subject"
+        }
+    }
+}

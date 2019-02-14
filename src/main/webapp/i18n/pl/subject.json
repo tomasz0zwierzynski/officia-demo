@@ -1,0 +1,22 @@
+{
+    "iterateApp": {
+        "subject": {
+            "home": {
+                "title": "Przedmioty",
+                "createLabel": "Utwórz nowy przedmiot",
+                "createOrEditLabel": "Utwórz lub edytuj przedmiot"
+            },
+            "created": "Przedmiot utworzony z identyfikatorem {{ param }}",
+            "updated": "Przedmiot  z identyfikatorem{{ param }} zaktualizowany",
+            "deleted": "Przedmiot z identyfikatorem {{ param }} usunięty",
+            "delete": {
+                "question": "Czy na pewno usunąć przdmiot o identyfikatorze {{ id }}?"
+            },
+            "detail": {
+                "title": "Przedmiot"
+            },
+            "name": "Nazwa",
+            "tutor": "Korepetytor"
+        }
+    }
+}
