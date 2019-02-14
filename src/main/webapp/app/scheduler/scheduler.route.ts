@@ -9,7 +9,7 @@ export const SCHEDULER_ROUTE: Route = {
     path: 'scheduler',
     component: SchedulerComponent,
     data: {
-        authorities: [],
+        authorities: ['ROLE_STUDENT'],
         pageTitle: 'scheduler.title'
     },
     canActivate: [UserRouteAccessService],

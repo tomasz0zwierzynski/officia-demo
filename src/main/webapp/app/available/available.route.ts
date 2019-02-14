@@ -9,7 +9,7 @@ export const AVAILABLE_ROUTE: Route = {
     path: 'available',
     component: AvailableComponent,
     data: {
-        authorities: [],
+        authorities: ['ROLE_TUTOR'],
         pageTitle: 'available.title'
     },
     canActivate: [UserRouteAccessService],

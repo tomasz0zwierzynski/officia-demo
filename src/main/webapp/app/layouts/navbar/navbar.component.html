@@ -17,14 +17,14 @@
                 </a>
             </li>
             
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *jhiHasAnyAuthority="'ROLE_STUDENT'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="scheduler" (click)="collapseNavbar()">
                     <i class="fa fa-hand-spock-o" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.scheduler">Scheduler</span>
                 </a>
             </li>
             
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *jhiHasAnyAuthority="'ROLE_TUTOR'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="available" (click)="collapseNavbar()">
                     <i class="fa fa-hand-spock-o" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.available">Available</span>
