@@ -1,22 +1,43 @@
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
-    <h6 class="text-right">{{message}}</h6>
-    <h1 class="text-capitalize text-center" jhiTranslate="page-one.title">Title</h1>
-    <h5 class="text-center" jhiTranslate="page-one.subtitle">Subtitle</h5>
-    <hr/>
-    <p class="text-justify" jhiTranslate="page-one.content">Content</p>
-  </div>
-  <div class="col-md-1"></div>
+  <button type="button" class="btn btn-primary" (click)="onSpawnEvent($event)">Spawn event</button>
+
 </div>
 
-<mwl-calendar-month-view
-    [viewDate]="viewDate"
-    [events]="events"
-    [refresh]="refresh"
-    [activeDayIsOpen]="activeDayIsOpen"
-    (dayClicked)="dayClicked($event.day)"
-    (eventClicked)="handleEvent('Clicked', $event.event)"
-    (eventTimesChanged)="eventTimesChanged($event)"
-  >
-</mwl-calendar-month-view>
+<div class="row">
+  <div class="col-12">
+    <mwl-calendar-month-view
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        [locale]="locale"
+        [weekStartsOn]="weekStartsOn"
+        [weekendDays]="weekendDays"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChanged)="eventTimesChanged($event)"
+      >
+    </mwl-calendar-month-view>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <mwl-calendar-week-view
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        [locale]="locale"
+        [weekStartsOn]="weekStartsOn"
+        [weekendDays]="weekendDays"
+        [activeDayIsOpen]="activeDayIsOpen"
+        [dayStartHour]="'8'"
+        [dayEndHour]="'24'"
+        [hourSegments]="'1'"
+        (dayClicked)="dayClicked($event.day)"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChanged)="eventTimesChanged($event)"
+      >
+    </mwl-calendar-week-view>
+  </div>
+</div>

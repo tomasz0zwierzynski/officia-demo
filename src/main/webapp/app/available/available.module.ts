@@ -1,15 +1,31 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import localePl from '@angular/common/locales/pl';
 
 import { IterateSharedModule } from '../shared';
-
-import { CalendarModule, DateAdapter } from 'angular-calendar';
+import {
+    CalendarModule,
+    DateFormatterParams,
+    DateAdapter,
+    CalendarNativeDateFormatter,
+    CalendarDateFormatter,
+    CalendarEventTitleFormatter
+} from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { AVAILABLE_ROUTE, AvailableComponent } from './';
 import { PageOneComponent } from './page-one/page-one.component';
 import { PageTwoComponent } from './page-two/page-two.component';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePl);
+
+class CustomDateFormatter extends CalendarNativeDateFormatter {
+    public dayViewHour({ date, locale }: DateFormatterParams): string {
+        return new Intl.DateTimeFormat(locale, { hour: 'numeric' }).format(date);
+    }
+}
 
 @NgModule({
     imports: [

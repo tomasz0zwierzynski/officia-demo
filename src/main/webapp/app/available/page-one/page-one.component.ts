@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
+import { DAYS_OF_WEEK } from 'angular-calendar';
 import { Subject } from 'rxjs';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 
@@ -25,6 +26,12 @@ const colors: any = {
 })
 export class PageOneComponent implements OnInit {
     message: string;
+
+    locale = 'pl';
+
+    weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
+
+    weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
 
     viewDate: Date = new Date();
 
@@ -89,14 +96,48 @@ export class PageOneComponent implements OnInit {
                 afterEnd: true
             },
             draggable: true
+        },
+        {
+            start: addHours(new Date(), 16),
+            end: addHours(new Date(), 20),
+            title: 'Spawned event',
+            color: colors.red,
+            actions: this.actions,
+            allDay: false,
+            resizable: {
+                beforeStart: true,
+                afterEnd: true
+            },
+            draggable: true
         }
     ];
 
     activeDayIsOpen = true;
 
     constructor() {
+        console.log('PageOne constructor');
         this.message = 'PageOneComponent message';
     }
 
     ngOnInit() {}
+
+    onSpawnEvent(event) {
+        console.log('spawnEvent');
+
+        this.events.push({
+            start: addHours(new Date(), 16),
+            end: addHours(new Date(), 20),
+            title: 'Spawned event',
+            color: colors.red,
+            actions: this.actions,
+            allDay: false,
+            resizable: {
+                beforeStart: true,
+                afterEnd: true
+            },
+            draggable: true
+        });
+
+        this.refresh.next();
+    }
 }
