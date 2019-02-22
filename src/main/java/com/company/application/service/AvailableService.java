@@ -49,6 +49,11 @@ public class AvailableService {
     }
 
 
+    public List<Available> findByTutorId(Long tutorId) {
+        log.debug("Request to get all Availables by tutor id");
+        return availableRepository.findByTutorId(tutorId);
+    }
+
     /**
      * Get one available by id.
      *

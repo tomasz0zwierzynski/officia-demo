@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -30,7 +30,7 @@ public class Appointment implements Serializable {
 
     @NotNull
     @Column(name = "jhi_date", nullable = false)
-    private LocalDate date;
+    private LocalDateTime date;
 
     @NotNull
     @Column(name = "duration", nullable = false)
@@ -70,16 +70,16 @@ public class Appointment implements Serializable {
         this.place = place;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public Appointment date(LocalDate date) {
+    public Appointment date(LocalDateTime date) {
         this.date = date;
         return this;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

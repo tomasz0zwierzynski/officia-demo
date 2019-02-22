@@ -1,11 +1,13 @@
 package com.company.application.web.rest;
 import com.company.application.domain.Available;
 import com.company.application.service.AvailableService;
+import com.company.application.service.AvailableUserService;
 import com.company.application.web.rest.errors.BadRequestAlertException;
 import com.company.application.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +31,9 @@ public class AvailableResource {
     private static final String ENTITY_NAME = "available";
 
     private final AvailableService availableService;
+
+    @Autowired
+    private AvailableUserService availableUserService;
 
     public AvailableResource(AvailableService availableService) {
         this.availableService = availableService;
@@ -80,8 +86,7 @@ public class AvailableResource {
      */
     @GetMapping("/availables")
     public List<Available> getAllAvailables() {
-        log.debug("REST request to get all Availables");
-        return availableService.findAll();
+        return availableUserService.getAvailablesForLoggedInTutor();
     }
 
     /**

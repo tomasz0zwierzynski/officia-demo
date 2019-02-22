@@ -3,11 +3,13 @@ package com.company.application;
 import com.company.application.config.ApplicationProperties;
 import com.company.application.config.DefaultProfileUtil;
 
+import com.company.application.service.TutorService;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
@@ -27,6 +29,9 @@ public class IterateApp {
     private static final Logger log = LoggerFactory.getLogger(IterateApp.class);
 
     private final Environment env;
+
+    @Autowired
+    TutorService tutorService;
 
     public IterateApp(Environment env) {
         this.env = env;
@@ -50,6 +55,7 @@ public class IterateApp {
             log.error("You have misconfigured your application! It should not " +
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
+
     }
 
     /**

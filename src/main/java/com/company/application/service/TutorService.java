@@ -5,6 +5,7 @@ import com.company.application.repository.TutorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -58,7 +59,10 @@ public class TutorService {
     public Page<Tutor> findAllWithEagerRelationships(Pageable pageable) {
         return tutorRepository.findAllWithEagerRelationships(pageable);
     }
-    
+
+    public List<Tutor> findByUserIsCurrentUser() {
+        return tutorRepository.findByUserIsCurrentUser();
+    }
 
     /**
      * Get one tutor by id.
@@ -78,6 +82,7 @@ public class TutorService {
      * @param id the id of the entity
      */
     public void delete(Long id) {
-        log.debug("Request to delete Tutor : {}", id);        tutorRepository.deleteById(id);
+        log.debug("Request to delete Tutor : {}", id);
+        tutorRepository.deleteById(id);
     }
 }

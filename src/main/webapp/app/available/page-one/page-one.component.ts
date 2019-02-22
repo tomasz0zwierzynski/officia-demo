@@ -1,8 +1,13 @@
-import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader, ViewChild, TemplateRef } from '@angular/core';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { DAYS_OF_WEEK } from 'angular-calendar';
 import { Subject } from 'rxjs';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { IAvailable } from '../../shared/model/available.model';
+import { AvailableService } from '../../entities/available.service';
+import { filter, map } from 'rxjs/operators';
 
 const colors: any = {
     red: {
@@ -25,6 +30,8 @@ const colors: any = {
     styleUrls: ['page-one.component.css']
 })
 export class PageOneComponent implements OnInit {
+    @ViewChild('modalContent') modalContent: TemplateRef<any>;
+
     message: string;
 
     locale = 'pl';
@@ -32,6 +39,8 @@ export class PageOneComponent implements OnInit {
     weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
 
     weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
+
+    availables: IAvailable[];
 
     viewDate: Date = new Date();
 
@@ -44,14 +53,14 @@ export class PageOneComponent implements OnInit {
         {
             label: '<i class="fa fa-fw fa-pencil"></i>',
             onClick: ({ event }: { event: CalendarEvent }): void => {
-                // this.handleEvent('Edited', event);
+                this.handleEvent('Edited', event);
             }
         },
         {
             label: '<i class="fa fa-fw fa-times"></i>',
             onClick: ({ event }: { event: CalendarEvent }): void => {
                 this.events = this.events.filter(iEvent => iEvent !== event);
-                // this.handleEvent('Deleted', event);
+                this.handleEvent('Deleted', event);
             }
         }
     ];
@@ -66,31 +75,6 @@ export class PageOneComponent implements OnInit {
             color: colors.red,
             actions: this.actions,
             allDay: true,
-            resizable: {
-                beforeStart: true,
-                afterEnd: true
-            },
-            draggable: true
-        },
-        {
-            start: startOfDay(new Date()),
-            title: 'An event with no end date',
-            color: colors.yellow,
-            actions: this.actions
-        },
-        {
-            start: subDays(endOfMonth(new Date()), 3),
-            end: addDays(endOfMonth(new Date()), 3),
-            title: 'A long event that spans 2 months',
-            color: colors.blue,
-            allDay: true
-        },
-        {
-            start: addHours(startOfDay(new Date()), 2),
-            end: new Date(),
-            title: 'A draggable and resizable event',
-            color: colors.yellow,
-            actions: this.actions,
             resizable: {
                 beforeStart: true,
                 afterEnd: true
@@ -114,12 +98,30 @@ export class PageOneComponent implements OnInit {
 
     activeDayIsOpen = true;
 
-    constructor() {
+    constructor(private modal: NgbModal, private availableService: AvailableService) {
         console.log('PageOne constructor');
         this.message = 'PageOneComponent message';
     }
 
     ngOnInit() {}
+
+    dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+        if (isSameMonth(date, this.viewDate)) {
+            this.viewDate = date;
+            if ((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) || events.length === 0) {
+                this.activeDayIsOpen = false;
+            } else {
+                this.activeDayIsOpen = true;
+            }
+        }
+    }
+
+    eventTimesChanged({ event, newStart, newEnd }: CalendarEventTimesChangedEvent): void {
+        event.start = newStart;
+        event.end = newEnd;
+        this.handleEvent('Dropped or resized', event);
+        this.refresh.next();
+    }
 
     onSpawnEvent(event) {
         console.log('spawnEvent');
@@ -139,5 +141,26 @@ export class PageOneComponent implements OnInit {
         });
 
         this.refresh.next();
+
+        this.availableService
+            .query()
+            .pipe(
+                filter((res: HttpResponse<IAvailable[]>) => res.ok),
+                map((res: HttpResponse<IAvailable[]>) => res.body)
+            )
+            .subscribe(
+                (res: IAvailable[]) => {
+                    console.log(res);
+                    this.availables = res;
+
+                    console.log(this.availables);
+                },
+                (res: HttpErrorResponse) => console.log(res.message)
+            );
+    }
+
+    handleEvent(action: string, event: CalendarEvent): void {
+        this.modalData = { event, action };
+        this.modal.open(this.modalContent, { size: 'lg' });
     }
 }

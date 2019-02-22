@@ -8,6 +8,7 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -26,11 +27,11 @@ public class Available implements Serializable {
 
     @NotNull
     @Column(name = "jhi_begin", nullable = false)
-    private LocalDate begin;
+    private LocalDateTime begin;
 
     @NotNull
     @Column(name = "jhi_end", nullable = false)
-    private LocalDate end;
+    private LocalDateTime end;
 
     @ManyToOne
     @JsonIgnoreProperties("availables")
@@ -45,29 +46,29 @@ public class Available implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getBegin() {
+    public LocalDateTime getBegin() {
         return begin;
     }
 
-    public Available begin(LocalDate begin) {
+    public Available begin(LocalDateTime begin) {
         this.begin = begin;
         return this;
     }
 
-    public void setBegin(LocalDate begin) {
+    public void setBegin(LocalDateTime begin) {
         this.begin = begin;
     }
 
-    public LocalDate getEnd() {
+    public LocalDateTime getEnd() {
         return end;
     }
 
-    public Available end(LocalDate end) {
+    public Available end(LocalDateTime end) {
         this.end = end;
         return this;
     }
 
-    public void setEnd(LocalDate end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 

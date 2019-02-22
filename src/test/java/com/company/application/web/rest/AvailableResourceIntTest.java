@@ -24,7 +24,9 @@ import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.List;
 
 
@@ -43,11 +45,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = IterateApp.class)
 public class AvailableResourceIntTest {
 
-    private static final LocalDate DEFAULT_BEGIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_BEGIN = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDateTime DEFAULT_BEGIN = LocalDateTime.ofEpochSecond(0L, 0, ZoneOffset.UTC);
+    private static final LocalDateTime UPDATED_BEGIN = LocalDateTime.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_END = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_END = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDateTime DEFAULT_END = LocalDateTime.ofEpochSecond(0L, 0, ZoneOffset.UTC);
+    private static final LocalDateTime UPDATED_END = LocalDateTime.now(ZoneId.systemDefault());
 
     @Autowired
     private AvailableRepository availableRepository;
