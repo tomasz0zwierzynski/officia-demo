@@ -42,6 +42,8 @@ export class PageOneComponent implements OnInit {
 
     availables: IAvailable[];
 
+    view: CalendarView = CalendarView.Month;
+
     viewDate: Date = new Date();
 
     modalData: {

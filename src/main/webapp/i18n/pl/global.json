@@ -92,6 +92,14 @@
         },
         "item-count": "Wyświetlono {{first}} - {{second}} z {{total}} elementów."
     },
+    "calendar": {
+        "previous": "Poprzedni",
+        "today": "Dzisiaj",
+        "next": "Następny",
+        "month": "Miesiąc",
+        "week": "Tydzień",
+        "day": "Dzień"
+    },
     "entity": {
         "action": {
             "addblob": "Dodaj dane binarne",

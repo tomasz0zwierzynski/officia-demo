@@ -1,7 +1,9 @@
 package com.company.application.web.rest;
 import com.company.application.domain.Available;
+import com.company.application.domain.Tutor;
 import com.company.application.service.AvailableService;
 import com.company.application.service.AvailableUserService;
+import com.company.application.service.TutorService;
 import com.company.application.web.rest.errors.BadRequestAlertException;
 import com.company.application.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -16,6 +18,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +34,9 @@ public class AvailableResource {
     private static final String ENTITY_NAME = "available";
 
     private final AvailableService availableService;
+
+    @Autowired
+    private TutorService tutorService;
 
     @Autowired
     private AvailableUserService availableUserService;
@@ -52,6 +58,13 @@ public class AvailableResource {
         if (available.getId() != null) {
             throw new BadRequestAlertException("A new available cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        List<Tutor> tutors = tutorService.findByUserIsCurrentUser();
+        if (tutors.size() != 1) {
+            throw new BadRequestAlertException("Found many tutor assigned to one user", ENTITY_NAME, "manytutors");
+        }
+
+        available.setTutor(tutorService.findByUserIsCurrentUser().get(0));
         Available result = availableService.save(available);
         return ResponseEntity.created(new URI("/api/availables/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -79,6 +92,11 @@ public class AvailableResource {
             .body(result);
     }
 
+    @GetMapping("/availables/{year}/{month}")
+    public List<Available> getAllAvailablesYearMonth(@PathVariable Long year, @PathVariable Long month) {
+        return Collections.emptyList();
+    }
+
     /**
      * GET  /availables : get all the availables.
      *
@@ -86,6 +104,7 @@ public class AvailableResource {
      */
     @GetMapping("/availables")
     public List<Available> getAllAvailables() {
+        log.debug("REST request to get Availables");
         return availableUserService.getAvailablesForLoggedInTutor();
     }
 

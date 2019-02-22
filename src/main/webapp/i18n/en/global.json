@@ -95,6 +95,14 @@
         },
         "item-count": "Showing {{first}} - {{second}} of {{total}} items."
     },
+    "calendar": {
+        "previous": "Previous",
+        "today": "Today",
+        "next": "Next",
+        "month": "Month",
+        "week": "Week",
+        "day": "Day"
+    },
     "entity": {
         "action": {
             "addblob": "Add blob",
